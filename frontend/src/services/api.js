@@ -89,8 +89,16 @@ export const organizationAPI = {
 // ============================================
 
 export const matchAPI = {
-  accept: (matchId) => api.post(`/api/matches/${matchId}/accept`),
-  decline: (matchId) => api.post(`/api/matches/${matchId}/decline`),
+  accept: (matchId) => api.patch(`/api/matches/${matchId}/accept`),
+  decline: (matchId) => api.patch(`/api/matches/${matchId}/decline`),
+  getVolunteerMatches: (volunteerId, status) =>
+    api.get(`/api/matches/volunteer/${volunteerId}`, { params: { status } }),
+  getOrganizationMatches: (organizationId, status) =>
+    api.get(`/api/matches/organization/${organizationId}`, {
+      params: { status },
+    }),
+  getAcceptedHelperInfo: (requestId) =>
+    api.get(`/api/matches/request/${requestId}/accepted`),
 };
 
 export default api;
